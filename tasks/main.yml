@@ -10,7 +10,7 @@
 
   # track workshop deployment
   - name: track workshop deployment
-    command: "curl https://docs.google.com/forms/d/e/1FAIpQLSeB07chJxLPln8xIeYia-A8s3fmkQUBY-RVgh5Fbw12JHAp8g/formResponse -d ifq -d entry.2085252894={{ workshop_type }} -d entry.1606494704={{ cluster_name }} -d submit=Submit"
+    shell: "curl https://docs.google.com/forms/d/e/1FAIpQLSeB07chJxLPln8xIeYia-A8s3fmkQUBY-RVgh5Fbw12JHAp8g/formResponse -d ifq -d entry.2085252894={{ workshop_type }} -d entry.1606494704={{ cluster_name }} -d submit=Submit 1> /dev/null"
     when:
       - cluster_name is defined
       - cluster_name is not none
