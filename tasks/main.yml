@@ -1,0 +1,19 @@
+---
+## Track Deployment of OpenShift Workshop
+
+# extract workshop name
+  - name: extract workshop name
+    set_fact:
+      workshop_name: "{{ apps_hostname_suffix|regex_replace('apps.([a-zA-Z0-9]*-[a-zA-Z0-9]{4}).openshiftworkshop.com', '\\1') }}"
+    ignore_errors: true
+    tags: always
+
+  # track workshop deployment
+  - name: track workshop deployment
+    command: "curl https://docs.google.com/forms/d/e/1FAIpQLSeB07chJxLPln8xIeYia-A8s3fmkQUBY-RVgh5Fbw12JHAp8g/formResponse -d ifq -d entry.2085252894={{ workshop_type }} -d entry.1606494704={{ workshop_name }} -d submit=Submit"
+    when:
+      - workshop_name is defined
+      - workshop_name is not none
+      - workshop_name|trim() != ""
+    ignore_errors: true
+    tags: always
